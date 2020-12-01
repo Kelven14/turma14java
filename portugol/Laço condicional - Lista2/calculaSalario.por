@@ -5,7 +5,7 @@ programa
 	{
 		cadeia C
 		inteiro N,E=0
-		real salarioTotal,salarioExcedente
+		real salarioBase,salarioExcedente,salarioTotal
 		caracter k='n'
 		
 		const real custoPorHora=10.00
@@ -20,22 +20,26 @@ programa
 
 			se(N>limiteHoras){
 				E+=(N-limiteHoras)
-				salarioTotal=N*custoPorHora
+				salarioBase=N*custoPorHora
 				salarioExcedente=E*custoHoraExtra
-				salarioTotal+=
-				escreva("\nSálario do trabalhador com o código: " + C +"\nSalario Total: R$"+salario+
-																":\nSalario excedente: R$"+salarioExcedente)
+				salarioTotal=salarioBase+salarioExcedente
+				escreva("\nDescrição do Sálario!\nCódigo do trabalhador: " + C +"\nSalario Base: R$"+salarioBase+
+									"\nSalario excedente: R$"+salarioExcedente+"\nSalario Total: R$"+salarioTotal)
+				escreva("\n-----------------------------------------")
 			}
 			senao{
 				E=0
-				salario=N*custoPorHora
+				salarioBase=N*custoPorHora
 				salarioExcedente=E*custoHoraExtra
-				escreva("\nSálario do trabalhador com o código: " + C +"\nSalario Total: R$"+salario+
-																":\nSalario excedente: R$"+salarioExcedente)
+				salarioTotal=salarioBase+salarioExcedente
+				escreva("\nDescrição do Sálario!\nCódigo do trabalhador: " + C +"\nSalario Base: R$"+salarioBase+
+								       "\nSalario excedente: R$"+salarioExcedente+"\nSalario Total: R$"+salarioTotal)
+				escreva("\n-----------------------------------------")
 			}
 			escreva("\n")
 			escreva("Deseja encerrar o programa(s-sim ou n-não):")
 			leia(k)
+			escreva("\n-----------------------------------------")
 			escreva("\n") 
 		}
 	
@@ -46,7 +50,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 411; 
+ * @POSICAO-CURSOR = 988; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

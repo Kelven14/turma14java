@@ -8,8 +8,6 @@ programa
 		const inteiro valorMulta=4 
 		const inteiro valorMax=50 
 	
-		
-		//Solicita a idade da pessoa em anos,meses e dias
 		escreva("Por favor informe o peso do tomate!")
 		escreva("\nPeso [kg]: ")
 		leia (pesoTomate)
@@ -31,7 +29,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 164; 
+ * @POSICAO-CURSOR = 166; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

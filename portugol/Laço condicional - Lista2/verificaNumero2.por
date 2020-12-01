@@ -10,14 +10,13 @@ programa
 		leia (numero) 
 
 		
-		
 		se (numero==0){
 			escreva("Voce digitou o zero!!\n" ) 
 		}
 			
 		senao se (numero < 0){
 			se(numero % 2 == 0){
-				escreva("O número digitado é par e negativo\n" ) // Onúmero 
+				escreva("O número digitado é par e negativo\n" ) 
 			}
 			senao  {
 				escreva("O número digitado é ímpar e negativo\n" ) 
@@ -26,7 +25,7 @@ programa
 			
 		senao se (numero > 0){
 			se(numero % 2 == 0){
-				escreva("O número digitado é par e positivo\n" ) // Onúmero 
+				escreva("O número digitado é par e positivo\n" ) 
 			}
 			senao  {
 				escreva("O número digitado é ímpar e positivo\n"  ) 
@@ -43,7 +42,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 32; 
+ * @POSICAO-CURSOR = 0; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
