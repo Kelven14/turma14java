@@ -3,15 +3,16 @@ programa
     funcao inicio()
 	{
 		inteiro numero,total
+		const inteiro limite=100
 
 		escreva("Digite um número: ")
 		leia(numero)
 		escreva("Sequencia: "+numero)
 		
-		enquanto (numero<= 100)
+		enquanto (numero<= limite)
 		{
 			numero*=3
-			escreva (" " + numero + " ")
+			escreva (" "+ numero +" ")
 		
 		}
 	}
@@ -21,7 +22,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 208; 
+ * @POSICAO-CURSOR = 113; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
