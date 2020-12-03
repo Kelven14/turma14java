@@ -4,11 +4,11 @@ programa
 	
 	funcao inicio()
 	{
-		real soma=0,numerosLido=0,media=0.0
+		real ,media=0.0,numerosLido=0,soma=0
 		inteiro numero=0
 		
 		escreva("------------------------- INFORMAÇÕES DO SISTEMA ---------------------------")
-		escreva("\nDigite valoes positivo.Se quiser finalizar digite um numero negativo!!")
+		escreva("\nDigite valoes positivos.Se quiser finalizar digite um numero negativo!!")
 		escreva ("\n-----------------------------------------------------------------------")
 		
 		enquanto (numero >= 0){
@@ -17,9 +17,11 @@ programa
 			se(numero>0){
 				soma += numero
 				numerosLido += 1
-				media = (soma/numerosLido)
+				
 			}
+			
 		}
+		media = (soma/numerosLido)
 		
 		escreva("\n------------------------- INFORMAÇÕES FINAIS---------------------------")
 		escreva("\nQuantidade de números digitados: ", numerosLido)
@@ -32,7 +34,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 8; 
+ * @POSICAO-CURSOR = 131; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
