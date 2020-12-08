@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class calculaIdade {
 
 	public static void main(String[] args) {
-		Scanner leia = new Scanner (System.in); //instanciar = criar
+		Scanner leia = new Scanner (System.in);
 		//variaveis
 				String nome;
 				int anoNascimento;
