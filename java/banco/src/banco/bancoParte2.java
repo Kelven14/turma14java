@@ -1,8 +1,9 @@
 package banco;
 
+import java.util.Random;
 import java.util.Scanner;
 
-public class banco {
+public class bancoParte2 {
 
 	final static int quantidadeMovimentacao = 4;//QUANTIDADE DE MOVIMENTAÇÕES MAXIMAS
 
@@ -33,10 +34,14 @@ public class banco {
 		char genero[] = {'M','M','F','F','M','M','M','M','M','M','M','M','M','F','F','M','M','M','M','M','M','M','F','M','F','F','M','F',
 				'M','F','M','M','M','M','M','F','F','M','F','M'};
 		int [] conta= new int[40];
-		int [] tipoConta= new int[5];	
+		int [] tipoConta= new int[40];	
+		double [] saldoConta= new double[40];
 		double [] movimento= new double[10];
-		
+		char[] tipoMovimento= new char[10];
 		int opcaoMenuPrincipal;
+		
+		inicializaVetor(conta,tipoConta,saldoConta);
+		//INICIALIZA TECLADO
 		Scanner leia = new Scanner(System.in);
 
 		// insereCodigo(codigoCliente);
@@ -197,5 +202,20 @@ public class banco {
 		pula();
 		System.out.print("Opção: ");
 	}
+	
+	
+	public static void inicializaVetor(int [] conta,int [] tipoConta,double [] saldoConta) {
+		Random sorteia = new Random();
+		
+		for (int x = 0; x < 10; x++) {
+			conta[x] = (x+1);
+			tipoConta[x] =  sorteia.nextInt(5) + 1;
+			saldoConta[x]=0.0;
+		}
+		
+	
+	}
 
+
+	
 }
