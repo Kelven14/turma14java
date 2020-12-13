@@ -3,7 +3,7 @@ package banco;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ai {
+public class atividadeBancoFinal {
 
 	public static void main(String[] args) {
 		// DECLARAÇÃO DE VARIAVEIS
