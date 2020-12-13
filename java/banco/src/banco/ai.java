@@ -30,12 +30,12 @@ public class ai {
 		double[] saldoConta = new double[40];
 		double[] movimento = new double[10];
 		char[] tipoMovimento = new char[10];
+		
 		int opcaoMenuPrincipal;
 		int numeroConta = 0;
 		int encontra = 0;
 		int escolha = 0, clienteLocalizado;
 		int contador = 0;
-
 		int quantidadeMovimentacao = 4;// QUANTIDADE DE MOVIMENTAÇÕES MAXIMAS
 		char opcao = 'S';// opcao
 		char opcaoTipo;
@@ -72,17 +72,21 @@ public class ai {
 			}
 		}
 
-		if (tipoConta[escolha] == 1) {
-			System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\t TIPO:CONTA POUPANÇA");
-		} else if (tipoConta[escolha] == 2) {
-			System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA CORRENTE");
-		} else if (tipoConta[escolha] == 3) {
-			System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA ESPECIAL");
-		} else {
-			System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA EMPRESARIAL");
-		}
-
+		
 		while (encontra == 1) {
+			
+			if (tipoConta[escolha] == 1) {
+				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\t TIPO:CONTA POUPANÇA");
+				/// JJ SUA PARTE VAI AQUI !! 
+			} else if (tipoConta[escolha] == 2) {
+				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA CORRENTE");
+			} else if (tipoConta[escolha] == 3) {
+				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA ESPECIAL");
+			} else {
+				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA EMPRESARIAL");
+			}
+
+			
 			do {
 				System.out.print("----------------------------------------------------\n");
 				System.out.print("█	     BANCO DIGITAL G&4		 █\n");
@@ -94,45 +98,122 @@ public class ai {
 				System.out.print("\nOpção: ");
 				opcaoMenuPrincipal = leia.nextInt();
 
-				// POUPANCA - jj
-				if (opcaoMenuPrincipal == 1 && tipoConta[escolha] == 1) {
+		
+				if (opcaoMenuPrincipal == 1) {
 					do {
 
 						movimentacaoDisponivel = quantidadeMovimentacao - contador;
 
 						if (movimentacaoDisponivel > 0) {
+							
 							System.out.printf("\nVocê possui %d transações disponiveis", movimentacaoDisponivel);
 							System.out.println();
 							System.out.printf("\nO que você deseja fazer: [D]-Débito, [C]-Crédito ou [S]-Sair");
 							System.out.print("\nOpção: ");
 							opcaoTipo = leia.next().toUpperCase().charAt(0);
-
+							
 							if (opcaoTipo == 'D') {
 								System.out.print("\nInforme quanto gostaria debitar:  R$ ");
 								movimento[contador] = leia.nextDouble();
 
-								if (movimento[contador] <= saldoConta[escolha]) {
-									saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
-									System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
-									tipoMovimento[contador] = 'D';
-									contador++;
-									System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
-									System.out.print("\nOpção: ");
-									opcao = leia.next().toUpperCase().charAt(0);
 
-									while (opcao != 'S' && opcao != 'N') {
-										System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+								if (tipoConta[escolha] == 1) { /// JJ - POUPANCA - PRONTO
+									
+									if (movimento[contador] <= saldoConta[escolha]) {
+										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										tipoMovimento[contador] = 'D';
+										contador++;
+										System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
 										System.out.print("\nOpção: ");
 										opcao = leia.next().toUpperCase().charAt(0);
+
+										while (opcao != 'S' && opcao != 'N') {
+											System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+											System.out.print("\nOpção: ");
+											opcao = leia.next().toUpperCase().charAt(0);
+										}
+									} else {
+										
+										System.out.printf("Saldo insuficiente. Selecione nova opção.");
 									}
-								} else {
-									System.out.printf("Saldo insuficiente. Selecione nova opção.");
+								} else if (tipoConta[escolha] == 2) { // VERONICA - CORRENTE 
+									if (movimento[contador] <= saldoConta[escolha]) {
+										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										tipoMovimento[contador] = 'D';
+										contador++;
+										System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
+										System.out.print("\nOpção: ");
+										opcao = leia.next().toUpperCase().charAt(0);
 
+										while (opcao != 'S' && opcao != 'N') {
+											System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+											System.out.print("\nOpção: ");
+											opcao = leia.next().toUpperCase().charAt(0);
+										}
+									} else {
+										/// PARTE INDIVIDUAL VERONICA 
+										System.out.printf("Saldo insuficiente. Selecione nova opção.");
+										
+									}
+								} else if (tipoConta[escolha] == 3) { // KELVEN - ESPECIAL
+									if (movimento[contador] <= saldoConta[escolha]) {
+										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										tipoMovimento[contador] = 'D';
+										contador++;
+										System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
+										System.out.print("\nOpção: ");
+										opcao = leia.next().toUpperCase().charAt(0);
+
+										while (opcao != 'S' && opcao != 'N') {
+											System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+											System.out.print("\nOpção: ");
+											opcao = leia.next().toUpperCase().charAt(0);
+										}
+									} else {
+										//PARTE INDIVIDUAL KELVEN 
+										System.out.printf("Saldo insuficiente. Selecione nova opção.");
+									}
+								} else { /// BEYMAR - ESPECIAL
+									
+									if (movimento[contador] <= saldoConta[escolha]) {
+										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										tipoMovimento[contador] = 'D';
+										contador++;
+										System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
+										System.out.print("\nOpção: ");
+										opcao = leia.next().toUpperCase().charAt(0);
+
+										while (opcao != 'S' && opcao != 'N') {
+											System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+											System.out.print("\nOpção: ");
+											opcao = leia.next().toUpperCase().charAt(0);
+										}
+									} else {
+										System.out.printf("Saldo insuficiente. ");
+										//DESEJA SOLICITA UM EMPRESTIMO ?? S OU N
+										//System.out.println("\.......? [S]-Sim ou [N]-Não ");
+										//System.out.print("\nOpção: ");
+										//opcao = leia.next().toUpperCase().charAt(0);//opcaoEmpresa
+										
+										//emp[escolha]=lei....
+										//deb =50 , saldo= 0, emp=100
+										
+									}
 								}
-
+								
+								
+								
+					
+								
+								
 							} else if (opcaoTipo == 'C') {
 								System.out.print("\nInforme quanto gostaria creditar:  R$ ");
 								movimento[contador] = leia.nextDouble();
+								
 								saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
 								System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
 								tipoMovimento[contador] = 'C';
@@ -165,15 +246,6 @@ public class ai {
 
 					} while (opcao == 'S');
 
-					
-				} else if (opcaoMenuPrincipal == 1 && tipoConta[escolha] == 2) {
-
-					
-				} else if (opcaoMenuPrincipal == 1 && tipoConta[escolha] == 3) {
-
-					
-				} else if (opcaoMenuPrincipal == 1 && tipoConta[escolha] == 4) {
-
 				}
 
 				else if (opcaoMenuPrincipal == 2) {
@@ -188,16 +260,7 @@ public class ai {
 				} else {
 					while (opcaoMenuPrincipal != 1 && opcaoMenuPrincipal != 2 && opcaoMenuPrincipal != 3) {
 						System.out.println("Por favor digite uma oção válida. Tente novamente!!\n ");
-						System.out.print(
-								"--------------------------------------------------------------------------------------------------\n");
-						System.out.print("█	     BANCO DIGITAL G&4		 █\n");
-						System.out.print(
-								"--------------------------------------------------------------------------------------------------\n");
-						System.out.print("\n------------ MENU INICIAL --------------\n\n");
-						System.out.print("[1] - MOVIMENTAÇÃO\n");
-						System.out.print("[2] - SALDO\n");
-						System.out.print("[3] - SAIR\n");
-						System.out.print("\nOpção: ");
+						
 						opcaoMenuPrincipal = leia.nextInt();
 					}
 				}
@@ -216,6 +279,7 @@ public class ai {
 	}
 
 	public static void inicializaVetor(int[] conta, int[] tipoConta, double[] saldoConta) {
+		
 		Random sorteia = new Random();
 
 		for (int x = 0; x < 40; x++) {
