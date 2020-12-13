@@ -40,10 +40,15 @@ public class ai {
 		char opcao = 'S';// opcao
 		char opcaoTipo;
 		int movimentacaoDisponivel = 0;
+		//VARIAVEIS VERONICA
+		int[] talao = new int[40];
+		int talaoCheque=0;
+		char opcaoTalao;
+	
 
 		Scanner leia = new Scanner(System.in);
 
-		inicializaVetor(conta, tipoConta, saldoConta);
+		inicializaVetor(conta, tipoConta, saldoConta,talao);
 
 		System.out.print("DIGITE O NÚMERO DA CONTA: ");
 		clienteLocalizado = leia.nextInt();
@@ -154,7 +159,26 @@ public class ai {
 										}
 									} else {
 										/// PARTE INDIVIDUAL VERONICA 
-										System.out.printf("Saldo insuficiente. Selecione nova opção.");
+										System.out.printf("Saldo insuficiente.\n");
+										
+										if(talao[escolha] > 0){
+											System.out.printf("Você tem %d talão(ões) de cheque disponível(is).", talao[escolha]);
+											System.out.println("\nVocê realmente deseja emitir um novo talão de cheque? (S)Sim - (N)Não: ");
+											opcaoTalao = leia.next().toUpperCase().charAt(0);
+							
+											if(opcaoTalao == 'S'){
+												talaoCheque++;
+												talao[escolha]--;
+												contador++;
+												System.out.printf("Talão emitido sob o nº %d", talaoCheque);
+											}
+											else{
+												System.out.printf("Talão não emitido");
+											}
+										}
+										else{
+											System.out.printf("O limite de talões de cheque por dia foi atingido.");
+										}
 										
 									}
 								} else if (tipoConta[escolha] == 3) { // KELVEN - ESPECIAL
@@ -228,7 +252,7 @@ public class ai {
 									opcao = leia.next().toUpperCase().charAt(0);
 								}
 							} else if (opcaoTipo == 'S') {
-								System.out.printf("saindo...");
+								System.out.printf("saindo...\n");
 								opcao = 'N';
 							} else {
 								while (opcaoTipo != 'D' && opcaoTipo != 'C' && opcaoTipo != 'S') {
@@ -258,11 +282,9 @@ public class ai {
 					System.out.println("Saindo do App, muito obrigado por utilizar nossos serviços!");
 					System.exit(0);
 				} else {
-					while (opcaoMenuPrincipal != 1 && opcaoMenuPrincipal != 2 && opcaoMenuPrincipal != 3) {
+					
 						System.out.println("Por favor digite uma oção válida. Tente novamente!!\n ");
-						
-						opcaoMenuPrincipal = leia.nextInt();
-					}
+			
 				}
 
 			} while (opcaoMenuPrincipal != 3);
@@ -278,14 +300,16 @@ public class ai {
 		System.out.print("\n");
 	}
 
-	public static void inicializaVetor(int[] conta, int[] tipoConta, double[] saldoConta) {
+	public static void inicializaVetor(int[] conta, int[] tipoConta, double[] saldoConta,int[] talao) {
 		
 		Random sorteia = new Random();
 
 		for (int x = 0; x < 40; x++) {
 			conta[x] = (x + 1);
-			tipoConta[x] = sorteia.nextInt(4) + 1;
+			tipoConta[x] = 2;
+			//tipoConta[x] = sorteia.nextInt(4) + 1;
 			saldoConta[x] = 0.0;
+			talao[x]=3;
 		}
 
 		/*
