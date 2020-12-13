@@ -30,25 +30,29 @@ public class atividadeBancoFinal {
 		double[] saldoConta = new double[40];
 		double[] movimento = new double[10];
 		char[] tipoMovimento = new char[10];
-		
+
 		int opcaoMenuPrincipal;
-		int numeroConta = 0;
 		int encontra = 0;
 		int escolha = 0, clienteLocalizado;
 		int contador = 0;
-		int quantidadeMovimentacao = 4;// QUANTIDADE DE MOVIMENTAÇÕES MAXIMAS
-		char opcao = 'S';// opcao
+		int quantidadeMovimentacao = 10;// QUANTIDADE DE MOVIMENTAÇÕES MAXIMAS
+		char opcao = 'S';// 
 		char opcaoTipo;
 		int movimentacaoDisponivel = 0;
-		//VARIAVEIS VERONICA
+		// VARIAVEIS VERONICA
 		int[] talao = new int[40];
-		int talaoCheque=0;
+		int talaoCheque = 0;
 		char opcaoTalao;
-	
+		// VARIAVEIS KELVEN
+		double[] limite = new double[40];
+		// VARIAVEIS JJ
+		int diaUsuario = 0;
+		int[] aniversario = new int[40];
+		// VARIAVEIS BEYMAR
 
 		Scanner leia = new Scanner(System.in);
 
-		inicializaVetor(conta, tipoConta, saldoConta,talao);
+		inicializaVetor(conta, tipoConta, saldoConta, talao, limite, aniversario);
 
 		System.out.print("DIGITE O NÚMERO DA CONTA: ");
 		clienteLocalizado = leia.nextInt();
@@ -64,25 +68,23 @@ public class atividadeBancoFinal {
 			System.out.print("Cliente não localizado.");
 		} else {
 
-			// System.out.print("Gênero que se identifica: [M]Masculino - [F]Feminino -
-			// [O]Outros: ");
-			// genero = leia.next().toUpperCase().charAt(0);
-
 			if (genero[escolha] == 'M') {
-				System.out.println("Seja bem-vindo ao G4 Bank Sr. " + cliente[escolha] + ":)");
+				System.out.println("SEJA BEM-VINDO AO G4 BANk SR. " + cliente[escolha] + ":)");
 			} else if (genero[escolha] == 'F') {
-				System.out.println("Seja bem-vinda ao G4 Bank Sra. " + cliente[escolha] + ":)");
-			} else {
-				System.out.println("Seja bem-vindx ao G4 Bank Srx. " + cliente[escolha] + ":)");
+				System.out.println("SEJA BEM-VINDA AO G4 BANk SRA. " + cliente[escolha] + ":)");
 			}
 		}
 
-		
 		while (encontra == 1) {
-			
+
 			if (tipoConta[escolha] == 1) {
 				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\t TIPO:CONTA POUPANÇA");
-				/// JJ SUA PARTE VAI AQUI !! 
+				/// JJ SUA PARTE VAI AQUI !!
+				linha(80);
+				System.out.printf("DIA DO ANIVERSÁRIO DA SUA CONTA: %d" , aniversario[escolha]);
+				System.out.print("\nINFORME O DIA DE HOJE: ");
+				diaUsuario = leia.nextInt();
+
 			} else if (tipoConta[escolha] == 2) {
 				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA CORRENTE");
 			} else if (tipoConta[escolha] == 3) {
@@ -91,7 +93,6 @@ public class atividadeBancoFinal {
 				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\tTIPO:CONTA EMPRESARIAL");
 			}
 
-			
 			do {
 				System.out.print("----------------------------------------------------\n");
 				System.out.print("█	     BANCO DIGITAL G&4		 █\n");
@@ -103,27 +104,32 @@ public class atividadeBancoFinal {
 				System.out.print("\nOpção: ");
 				opcaoMenuPrincipal = leia.nextInt();
 
-		
 				if (opcaoMenuPrincipal == 1) {
-					do {
+					System.out.println("DESEJA INICIAR UMA MOVIMENTAÇÃO:[S]-Sim ou [N]-Não ");
+					System.out.print("\nOPÇÃO: ");
+					opcao = leia.next().toUpperCase().charAt(0);
+					while (opcao == 'S') {
 
 						movimentacaoDisponivel = quantidadeMovimentacao - contador;
 
 						if (movimentacaoDisponivel > 0) {
-							
+
 							System.out.printf("\nVocê possui %d transações disponiveis", movimentacaoDisponivel);
 							System.out.println();
 							System.out.printf("\nO que você deseja fazer: [D]-Débito, [C]-Crédito ou [S]-Sair");
 							System.out.print("\nOpção: ");
 							opcaoTipo = leia.next().toUpperCase().charAt(0);
-							
+
 							if (opcaoTipo == 'D') {
 								System.out.print("\nInforme quanto gostaria debitar:  R$ ");
 								movimento[contador] = leia.nextDouble();
+								while (movimento[contador] < 0) {
+									System.out.printf("\nValor inválido! Digite novamente: R$ ");
+									movimento[contador] = leia.nextDouble();
+								}
 
+								if (tipoConta[escolha] == 1) { /// JJ - POUPANCA
 
-								if (tipoConta[escolha] == 1) { /// JJ - POUPANCA - PRONTO
-									
 									if (movimento[contador] <= saldoConta[escolha]) {
 										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
 										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
@@ -138,11 +144,13 @@ public class atividadeBancoFinal {
 											System.out.print("\nOpção: ");
 											opcao = leia.next().toUpperCase().charAt(0);
 										}
+
 									} else {
-										
-										System.out.printf("Saldo insuficiente. Selecione nova opção.");
+
+										System.out.printf("Saldo insuficiente. Operação não realizada!");
 									}
-								} else if (tipoConta[escolha] == 2) { // VERONICA - CORRENTE 
+
+								} else if (tipoConta[escolha] == 2) { // VERONICA - CORRENTE
 									if (movimento[contador] <= saldoConta[escolha]) {
 										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
 										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
@@ -158,50 +166,75 @@ public class atividadeBancoFinal {
 											opcao = leia.next().toUpperCase().charAt(0);
 										}
 									} else {
-										/// PARTE INDIVIDUAL VERONICA 
+										/// PARTE INDIVIDUAL VERONICA
 										System.out.printf("Saldo insuficiente.\n");
-										
-										if(talao[escolha] > 0){
-											System.out.printf("Você tem %d talão(ões) de cheque disponível(is).", talao[escolha]);
-											System.out.println("\nVocê realmente deseja emitir um novo talão de cheque? (S)Sim - (N)Não: ");
+
+										if (talao[escolha] > 0) {
+											System.out.printf("Você tem %d talão(ões) de cheque disponível(is).",
+													talao[escolha]);
+											System.out.println(
+													"\nVocê realmente deseja emitir um novo talão de cheque? (S)Sim - (N)Não: ");
 											opcaoTalao = leia.next().toUpperCase().charAt(0);
-							
-											if(opcaoTalao == 'S'){
+
+											if (opcaoTalao == 'S') {
 												talaoCheque++;
 												talao[escolha]--;
 												contador++;
 												System.out.printf("Talão emitido sob o nº %d", talaoCheque);
-											}
-											else{
+											} else {
 												System.out.printf("Talão não emitido");
 											}
-										}
-										else{
+										} else {
 											System.out.printf("O limite de talões de cheque por dia foi atingido.");
 										}
-										
+
 									}
 								} else if (tipoConta[escolha] == 3) { // KELVEN - ESPECIAL
-									if (movimento[contador] <= saldoConta[escolha]) {
+									if (movimento[contador] > saldoConta[escolha] || saldoConta[escolha] == 0) {
+
+										// PARTE INDIVIDUAL KELVEN
+										System.out.println("Saldo insuficiente.");
+										System.out.printf(
+												"Para concluir a solicitação de débito foi utilizado o seu limite de R$ %.2f\n",
+												limite[escolha]);
+
+										if (saldoConta[escolha] < 0) {
+											limite[escolha] = limite[escolha] - movimento[contador];
+											saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
+											System.out.printf(
+													"Saldo atual R$ 0.00\tLimite Atual R$ " + limite[escolha] + "\n");
+											tipoMovimento[contador] = 'D';
+											contador++;
+										} else {
+
+											limite[escolha] = limite[escolha] - movimento[contador]
+													+ saldoConta[escolha];
+											saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
+											System.out.printf(
+													"Saldo atual R$ 0.00\tLimite Atual R$ " + limite[escolha] + "\n");
+											tipoMovimento[contador] = 'D';
+											contador++;
+										}
+
+									} else {
+
 										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
 										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
 										tipoMovimento[contador] = 'D';
 										contador++;
-										System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
+
+									}
+									System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
+									System.out.print("\nOpção: ");
+									opcao = leia.next().toUpperCase().charAt(0);
+
+									while (opcao != 'S' && opcao != 'N') {
+										System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
 										System.out.print("\nOpção: ");
 										opcao = leia.next().toUpperCase().charAt(0);
-
-										while (opcao != 'S' && opcao != 'N') {
-											System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
-											System.out.print("\nOpção: ");
-											opcao = leia.next().toUpperCase().charAt(0);
-										}
-									} else {
-										//PARTE INDIVIDUAL KELVEN 
-										System.out.printf("Saldo insuficiente. Selecione nova opção.");
 									}
 								} else { /// BEYMAR - ESPECIAL
-									
+
 									if (movimento[contador] <= saldoConta[escolha]) {
 										saldoConta[escolha] = saldoConta[escolha] - movimento[contador];
 										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
@@ -218,30 +251,40 @@ public class atividadeBancoFinal {
 										}
 									} else {
 										System.out.printf("Saldo insuficiente. ");
-										//DESEJA SOLICITA UM EMPRESTIMO ?? S OU N
-										//System.out.println("\.......? [S]-Sim ou [N]-Não ");
-										//System.out.print("\nOpção: ");
-										//opcao = leia.next().toUpperCase().charAt(0);//opcaoEmpresa
-										
-										//emp[escolha]=lei....
-										//deb =50 , saldo= 0, emp=100
-										
+										// DESEJA SOLICITA UM EMPRESTIMO ?? S OU N
+										// System.out.println("\.......? [S]-Sim ou [N]-Não ");
+										// System.out.print("\nOpção: ");
+										// opcao = leia.next().toUpperCase().charAt(0);//opcaoEmpresa
+
+										// emp[escolha]=lei....
+										// deb =50 , saldo= 0, emp=100
+
 									}
 								}
-								
-								
-								
-					
-								
-								
+
 							} else if (opcaoTipo == 'C') {
 								System.out.print("\nInforme quanto gostaria creditar:  R$ ");
 								movimento[contador] = leia.nextDouble();
-								
-								saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
-								System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
-								tipoMovimento[contador] = 'C';
-								contador++;
+								while (movimento[contador] < 0) {
+									System.out.printf("\nValor inválido! Digite novamente: R$ ");
+									movimento[contador] = leia.nextDouble();
+								}
+
+								if (tipoConta[escolha] == 3) {
+									if (saldoConta[escolha] < 0) {
+
+										limite[escolha] = limite[escolha] - saldoConta[escolha];
+										saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
+									} else {
+										saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
+									}
+
+								} else {
+									saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
+									System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+									tipoMovimento[contador] = 'C';
+									contador++;
+								}
 								System.out.println("\nDeseja Continuar? [S]-Sim ou [N]-Não ");
 								System.out.print("\nOpção: ");
 								opcao = leia.next().toUpperCase().charAt(0);
@@ -268,28 +311,52 @@ public class atividadeBancoFinal {
 							opcao = 'N';
 						}
 
-					} while (opcao == 'S');
+					}
+					if (diaUsuario == aniversario[escolha]) {
+						saldoConta[escolha] = 1.005 * saldoConta[escolha];
+						System.out.printf("SALDO ATUAL COM REAJUSTE: R$ %.2f\n", saldoConta[escolha]);
+					}
 
 				}
 
 				else if (opcaoMenuPrincipal == 2) {
-					linha(45);
-					System.out.printf("\nSeu saldo é de R$ %.2f ", saldoConta[escolha]);
-					System.out.println();
-					linha(45);
+					if (tipoConta[escolha] == 3) {
+						if (saldoConta[escolha] < 0) {
+							linha(45);
+							System.out.printf("\nSeu saldo é de R$ 0,00 e possui um limite de R$ %.2f  ",
+									limite[escolha]);
+							System.out.println();
+							linha(45);
 
-				} else if (opcaoMenuPrincipal == 3) {
+						} else {
+							linha(45);
+							System.out.printf("\nSeu saldo é de R$ %.2f e possui um limite de R$ %.2f  ",
+									saldoConta[escolha], limite[escolha]);
+							System.out.println();
+							linha(45);
+						}
+					} else {
+						linha(45);
+						System.out.printf("\nSeu saldo é de R$ %.2f ", saldoConta[escolha]);
+						System.out.println();
+						linha(45);
+					}
+
+				}
+
+				else if (opcaoMenuPrincipal == 3) {
 					System.out.println("Saindo do App, muito obrigado por utilizar nossos serviços!");
 					System.exit(0);
 				} else {
-					
-						System.out.println("Por favor digite uma oção válida. Tente novamente!!\n ");
-			
+
+					System.out.println("Por favor digite uma oção válida. Tente novamente!!\n ");
+
 				}
 
 			} while (opcaoMenuPrincipal != 3);
 
 		}
+		leia.close();
 
 	}// FIM MAIN
 
@@ -300,16 +367,19 @@ public class atividadeBancoFinal {
 		System.out.print("\n");
 	}
 
-	public static void inicializaVetor(int[] conta, int[] tipoConta, double[] saldoConta,int[] talao) {
-		
+	public static void inicializaVetor(int[] conta, int[] tipoConta, double[] saldoConta, int[] talao, double[] limite,
+			int[] aniversario) {
+
 		Random sorteia = new Random();
 
 		for (int x = 0; x < 40; x++) {
 			conta[x] = (x + 1);
-			tipoConta[x] = 2;
-			//tipoConta[x] = sorteia.nextInt(4) + 1;
+			// tipoConta[x] = 1;
+			tipoConta[x] = sorteia.nextInt(4) + 1;
 			saldoConta[x] = 0.0;
-			talao[x]=3;
+			talao[x] = 3;
+			limite[x] = sorteia.nextInt(900) + 101;
+			aniversario[x] = sorteia.nextInt(31) + 1;
 		}
 
 		/*
