@@ -36,7 +36,7 @@ public class atividadeBancoFinal {
 		int escolha = 0, clienteLocalizado;
 		int contador = 0;
 		int quantidadeMovimentacao = 10;// QUANTIDADE DE MOVIMENTAÇÕES MAXIMAS
-		char opcao = 'S';// 
+		char opcao = 'S';//
 		char opcaoTipo;
 		int movimentacaoDisponivel = 0;
 		// VARIAVEIS VERONICA
@@ -49,6 +49,9 @@ public class atividadeBancoFinal {
 		int diaUsuario = 0;
 		int[] aniversario = new int[40];
 		// VARIAVEIS BEYMAR
+		char opcaoEmpresa; // opcao do menu empresa
+		double emprestimo[] = new double[40];
+		double saldoEmprestimo = 1000; // limite do meu emprestimo
 
 		Scanner leia = new Scanner(System.in);
 
@@ -81,7 +84,7 @@ public class atividadeBancoFinal {
 				System.out.println("NÚMERO DA CONTA: " + clienteLocalizado + "\t TIPO:CONTA POUPANÇA");
 				/// JJ SUA PARTE VAI AQUI !!
 				linha(80);
-				System.out.printf("DIA DO ANIVERSÁRIO DA SUA CONTA: %d" , aniversario[escolha]);
+				System.out.printf("DIA DO ANIVERSÁRIO DA SUA CONTA: %d", aniversario[escolha]);
 				System.out.print("\nINFORME O DIA DE HOJE: ");
 				diaUsuario = leia.nextInt();
 
@@ -94,7 +97,7 @@ public class atividadeBancoFinal {
 			}
 
 			do {
-				System.out.print("----------------------------------------------------\n");
+				System.out.print("\n----------------------------------------------------\n");
 				System.out.print("█	     BANCO DIGITAL G&4		 █\n");
 				System.out.print("-----------------------------------------------------\n");
 				System.out.print("\n------------ MENU INICIAL --------------\n\n");
@@ -250,15 +253,40 @@ public class atividadeBancoFinal {
 											opcao = leia.next().toUpperCase().charAt(0);
 										}
 									} else {
-										System.out.printf("Saldo insuficiente. ");
-										// DESEJA SOLICITA UM EMPRESTIMO ?? S OU N
-										// System.out.println("\.......? [S]-Sim ou [N]-Não ");
-										// System.out.print("\nOpção: ");
-										// opcao = leia.next().toUpperCase().charAt(0);//opcaoEmpresa
+										System.out.printf("\nSaldo insuficiente. ");
+										System.out.print("Deseja solicitar um empréstimo [S] ou [N]?");
+										System.out.print("\nOpção: ");
+										opcaoEmpresa = leia.next().toUpperCase().charAt(0);
 
-										// emp[escolha]=lei....
-										// deb =50 , saldo= 0, emp=100
+										if (opcaoEmpresa == 'S') {
 
+											System.out.println("\nSaldo atual do empréstimo : " + saldoEmprestimo); // emprestimo
+																													// atual
+											System.out.print("Digite o valor solicitado do empréstimo: ");
+											emprestimo[escolha] = leia.nextDouble();
+											// valor max do emprestimo
+											if (emprestimo[escolha] <= saldoEmprestimo) {
+												saldoEmprestimo = saldoEmprestimo - emprestimo[escolha];
+												saldoConta[escolha] = saldoConta[escolha] + emprestimo[escolha];
+												System.out.println("\nSaldo do empréstimo : " + saldoEmprestimo); // emprestimo
+																													// atual
+												System.out.printf("\nSeu novo saldo é de R$ %.2f", saldoConta[escolha]);
+												contador++; // contador para os movimentos diminuirem
+											} else {
+												System.out.print("\nPedido maior que seu limite!\n");
+											}
+
+										} else if (opcaoEmpresa == 'N') {
+											System.out.println("Saldo do empréstimo : " + saldoEmprestimo); // emprestimo
+																											// atual
+											System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										} else {
+											while (opcao != 'S' && opcao != 'N') {
+												System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+												System.out.print("\nOpção: ");
+												opcao = leia.next().toUpperCase().charAt(0);
+											}
+										}
 									}
 								}
 
@@ -275,11 +303,60 @@ public class atividadeBancoFinal {
 
 										limite[escolha] = limite[escolha] - saldoConta[escolha];
 										saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										tipoMovimento[contador] = 'C';
+										contador++;
 									} else {
 										saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+										tipoMovimento[contador] = 'C';
+										contador++;
 									}
 
-								} else {
+								} else if (tipoConta[escolha] == 4) {
+
+									saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
+									System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+									tipoMovimento[contador] = 'C';
+									contador++;
+
+									System.out.print("\nDeseja solicitar um empréstimo [S] ou [N]?");
+									System.out.print("\nOpção: ");
+									opcaoEmpresa = leia.next().toUpperCase().charAt(0);
+
+									if (opcaoEmpresa == 'S') {
+
+										System.out.println("\nSaldo atual do empréstimo : " + saldoEmprestimo); // emprestimo
+																												// atual
+										System.out.print("Digite o valor solicitado do empréstimo: ");
+										emprestimo[escolha] = leia.nextDouble();
+										// valor max do emprestimo
+										if (emprestimo[escolha] <= saldoEmprestimo) {
+											saldoEmprestimo = saldoEmprestimo - emprestimo[escolha];
+											saldoConta[escolha] = saldoConta[escolha] + emprestimo[escolha];
+											System.out.println("\nSaldo do empréstimo : " + saldoEmprestimo); // emprestimo
+																												// atual
+											System.out.printf("\nSeu novo saldo é de R$ %.2f", saldoConta[escolha]);
+											contador++; // contador para os movimentos diminuirem
+										} else {
+											System.out.print("\nPedido maior que seu limite!\n");
+										}
+
+									} else if (opcaoEmpresa == 'N') {
+										System.out.println("Saldo do empréstimo : " + saldoEmprestimo); // emprestimo
+																										// atual
+										System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+									} else {
+										while (opcao != 'S' && opcao != 'N') {
+											System.out.println("Por favor digite [S] ou [N]. Tente novamente! ");
+											System.out.print("\nOpção: ");
+											opcao = leia.next().toUpperCase().charAt(0);
+										}
+									}
+
+								}
+
+								else {
 									saldoConta[escolha] = saldoConta[escolha] + movimento[contador];
 									System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
 									tipoMovimento[contador] = 'C';
@@ -335,7 +412,44 @@ public class atividadeBancoFinal {
 							System.out.println();
 							linha(45);
 						}
-					} else {
+					} else if (tipoConta[escolha] == 4) {
+
+						linha(45);
+						System.out.printf("\nSeu saldo é de R$ %.2f ", saldoConta[escolha]);
+						System.out.println();
+						linha(45);
+
+						System.out.print("\nDeseja solicitar um empréstimo [S] ou [N]?");
+						System.out.print("\nOpção: ");
+						opcaoEmpresa = leia.next().toUpperCase().charAt(0);
+
+						if (opcaoEmpresa == 'S') {
+
+							System.out.println("\nSaldo atual do empréstimo : " + saldoEmprestimo); // emprestimo
+																									// atual
+							System.out.print("Digite o valor solicitado do empréstimo: ");
+							emprestimo[escolha] = leia.nextDouble();
+							// valor max do emprestimo
+							if (emprestimo[escolha] <= saldoEmprestimo) {
+								saldoEmprestimo = saldoEmprestimo - emprestimo[escolha];
+								saldoConta[escolha] = saldoConta[escolha] + emprestimo[escolha];
+								System.out.println("\nSaldo do empréstimo : " + saldoEmprestimo); // emprestimo
+																									// atual
+								System.out.printf("\nSeu novo saldo é de R$ %.2f", saldoConta[escolha]);
+								contador++; // contador para os movimentos diminuirem
+							} else {
+								System.out.print("\nPedido maior que seu limite!\n");
+							}
+
+						} else if (opcaoEmpresa == 'N') {
+							System.out.println("Saldo do empréstimo : " + saldoEmprestimo); // emprestimo
+																							// atual
+							System.out.printf("Seu novo saldo é de R$ %.2f", saldoConta[escolha]);
+						}
+
+					}
+
+					else {
 						linha(45);
 						System.out.printf("\nSeu saldo é de R$ %.2f ", saldoConta[escolha]);
 						System.out.println();
@@ -374,7 +488,7 @@ public class atividadeBancoFinal {
 
 		for (int x = 0; x < 40; x++) {
 			conta[x] = (x + 1);
-			// tipoConta[x] = 1;
+			// tipoConta[x] = 4;
 			tipoConta[x] = sorteia.nextInt(4) + 1;
 			saldoConta[x] = 0.0;
 			talao[x] = 3;
