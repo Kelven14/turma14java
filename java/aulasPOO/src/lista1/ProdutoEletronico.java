@@ -21,9 +21,9 @@ public class ProdutoEletronico {
 		
 	}
 
-	public void mostrarInformação() {
+	public void mostrarInformacoes() {
 		if(this.modelo!=null) {
-			System.out.println("Nome: " + this.nome + "\nMarca: " + this.marca + "\nValor: R$" + this.valor+ "Modelo: "+this.modelo);
+			System.out.println("Nome: " + this.nome + "\nMarca: " + this.marca + "\nValor: R$" + this.valor+ "\nModelo: "+this.modelo);
 		}
 		else {
 			System.out.println("Nome: " + this.nome + "\nMarca: " + this.marca + "\nValor: R$" + this.valor);	

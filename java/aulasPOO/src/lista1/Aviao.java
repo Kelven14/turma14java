@@ -27,6 +27,8 @@ public class Aviao {
 	public void statusDecolar() {
 		if (this.velocidadeAtual == 0) {
 			System.out.println("Avião parado na pista");
+		} else if (this.velocidadeAtual > 0 && this.velocidadeAtual < 203) {
+			System.out.println("Avião preparando para decolar");
 		} else if (this.velocidadeAtual >= 203 && this.velocidadeAtual <= 278) {
 			System.out.println("Avião decolando");
 		} else if (this.velocidadeAtual > 278) {
@@ -34,10 +36,10 @@ public class Aviao {
 		}
 
 	}
-	
-	
-	public void acelerar(double quantidade) {
-		this.velocidadeAtual+=quantidade;
+
+	public void mostraInformacoes() {
+		System.out.println("Companhia: " + this.companhia + "\nModelo: " + this.modelo + "\nCapacidade de Passageiros: "
+				+ this.capacidadePassageiros + "\nDestino: " + this.destino + "\nPiloto: " + this.piloto + ".");
 	}
 
 }
