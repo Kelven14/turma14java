@@ -6,7 +6,7 @@ public class Teste {
 		
 		Cachorro dog =new Cachorro("Apolo", 5);
 		Cavalo horse = new Cavalo("Zeus",8);
-		Preguica preguica =new Preguica("Poseidon",10);
+		Preguica sloth =new Preguica("Poseidon",3);
 		
 		
 		linha(60);
