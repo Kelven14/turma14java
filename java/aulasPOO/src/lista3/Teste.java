@@ -20,10 +20,10 @@ public class Teste {
 		System.out.print("Som do  Cavalo: ");
 		dog.emitirSom();
 		linha(60);
-		System.out.print("Animal: Preguiça\tNome: "+preguica.getNome()+"\tIdade: "+preguica.getIdade()+"\n");
-		preguica.acao();
+		System.out.print("Animal: Preguiça\tNome: "+sloth.getNome()+"\tIdade: "+sloth.getIdade()+"\n");
+		sloth.acao();
 		System.out.print("Som da Preguiça: ");
-		preguica.emitirSom();
+		sloth.emitirSom();
 		linha(60);
 		
 
