@@ -41,6 +41,16 @@ public class Loja {
 			System.out.println("Opcão errada");
 		}
 
+		
+		System.out.println("---------------------");
+		Object[] vetor= {peca1,peca2,peca3};
+		
+		for(Object i : vetor) {
+			((Produto) i).getInfo();
+			System.out.println("---------------------");
+		}
+		
 	}
+	
 
 }

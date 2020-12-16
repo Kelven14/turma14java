@@ -16,5 +16,9 @@ public class Produto {
 	public double valorFinal(int quantidade) {
 		return (this.valorUnitario * quantidade);
 	}
+	
+	public void getInfo() {
+		System.out.println("Nome: " +this.nomeProduto+ "\nQtd disponível no estoque: " +this.qtdeEstoque+ "\nValor unitátio R$" + this.valorUnitario);
+	}
 
 }
