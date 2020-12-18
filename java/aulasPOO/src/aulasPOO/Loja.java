@@ -9,7 +9,7 @@ public class Loja {
 	public static void main(String[] args) {
 
 		Scanner leia = new Scanner(System.in);
-		Pessoa cliente = new Pessoa();
+		Cliente cliente = new Cliente();
 		Produto peca1 = new Produto("Vestido", 3, 100);
 		Produto peca2 = new Produto("blusa", 1, 50);
 		Produto peca3 = new Produto("Camisa", 2, 20);
