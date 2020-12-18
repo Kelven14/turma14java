@@ -15,6 +15,7 @@ public class BancoPrincipal {
 
 		char op;// visivel em todo o programa - escopo
 		char saida;
+		
 		int numeroConta = 1; // escopo global
 		int contador = 0;
 		int quantidadeMovimentacao = 10;// QUANTIDADE DE MOVIMENTAÇÕES MAXIMAS
