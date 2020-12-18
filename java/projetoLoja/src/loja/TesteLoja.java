@@ -218,6 +218,14 @@ public class TesteLoja {
 								System.out.print(
 										"Qual a forma de pagamento? \n1-À vista em dinheiro\n2-Cartão de Débito\n3-Cartão de Crédito(uma vez)\n4-Cartão de Crédito(Parcelado em até três vezes)\n");
 								int formaPag = leia.nextInt();
+								while (formaPag != 1 && formaPag != 2 && formaPag != 3 && formaPag != 4) {
+									System.out.print("Opção inválida! Digite uma opção válida\n");
+									System.out.print(
+											"Qual a forma de pagamento? \n1-À vista em dinheiro\n2-Cartão de Débito\n3-Cartão de Crédito(uma vez)\n4-Cartão de Crédito(Parcelado em até três vezes)\n");
+
+									formaPag = leia.nextInt();
+								}
+
 								if (formaPag == 1) {
 									desconto = totalPagamento * descontoAvista;
 
@@ -227,14 +235,24 @@ public class TesteLoja {
 								} else if (formaPag == 3) {
 									acrescimo = totalPagamento * jurosAvistaCartao;
 								} else if (formaPag == 4) {
-									acrescimo = totalPagamento * jurosParcelado;
-									System.out.print("Quantas Parcelas?");
+
+									System.out.print("Quantas Parcelas? (1-3)");
 									int parcela = leia.nextInt();
 
-									valorParcela = totalPagamento / parcela;
+									while (parcela != 1 && parcela != 2) {
+										System.out.print("Opção inválida! Escolha um valor de parcela válida");
+										System.out.print("\nQuantas Parcelas? (1-3)");
+										parcela = leia.nextInt();
+									}
 
-									System.out.printf("Valor total parcelado %d vezes é igual R$ %.2F ", parcela,
-											valorParcela);
+									if (parcela <= 3 && parcela > 0) {
+										acrescimo = totalPagamento * jurosParcelado;
+										valorParcela = totalPagamento / parcela;
+										System.out.printf("Valor total parcelado %d em vezes de R$ %.2f ", parcela,
+												valorParcela);
+
+									}
+
 								} else {
 									System.out.print("Opção inválida! Digite uma opção válida\n");
 
@@ -242,10 +260,12 @@ public class TesteLoja {
 
 								imposto = (totalPagamento + acrescimo - desconto) * 0.1;
 								totalFinal = totalPagamento + acrescimo - desconto + imposto;
-											                 	                 
+								System.out.println();
 								inseriLinha(85, "▬");
-								System.out.println("            NOTA FISCAL             CÓDIGO DE BARRA   ");
-								inseriLinha(85, "▬");	
+								System.out.println("                           NOTA FISCAL ");
+								inseriLinha(85, "▬");
+								System.out.println("           N° 000186                CÓDIGO DE BARRA   ");
+
 								System.out.println("         __________________        _________________  ");
 								System.out.println("         |                 |       |                | ");
 								System.out.println("         |                 |       | █||█||█||█||█  | ");
@@ -253,7 +273,7 @@ public class TesteLoja {
 								System.out.println("         |                 |       | █||█||█||█||█  | ");
 								System.out.println("         |_________________|       |________________| ");
 								inseriLinha(85, "▬");
-								System.out.printf("Nome: %s\tCPF: %S\tIdade: %d anos", cliente.getNome(),
+								System.out.printf("Nome: %s\tCPF: %Sq\t\tIdade: %d anos", cliente.getNome(),
 										cliente.getCpf(), cliente.voltaIdade(cliente.getAnoNascimento()));
 								System.out.println();
 								inseriLinha(85, "▬");
