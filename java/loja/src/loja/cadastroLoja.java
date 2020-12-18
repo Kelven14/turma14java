@@ -7,12 +7,14 @@ public class cadastroLoja {
 	public static void main(String[] args) {
 		int opcaoGenero;
 		String nome;
+		
 		String codigos[] = new String[10];
 		String produtos[] = { "Vestido Jeans", "Shorts Jeans", "Calça Jeans", "Calça Xadrez", "Jaqueta Jeans",
 				"Conjunto de moletom", "Vertido longo girassol", "Conjunto Kimono", "Macacão", "Croped" };
 		double precoUnitarios[] = { 80, 30, 100, 40, 90, 70, 70, 40, 80, 20 };
 		int estoque[] = new int[10];
 		int carrinho[] = new int[10];
+		
 		char opcao = 0;
 		int opcaoMenu = 0;
 

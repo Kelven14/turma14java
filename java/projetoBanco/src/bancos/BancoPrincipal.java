@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
-import aulasPOO.Funcionario;
+
 
 public class BancoPrincipal {
 

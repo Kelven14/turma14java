@@ -58,9 +58,13 @@ public abstract class Conta {
 	}
 
 	public void credito(double valorCredito) {
+		if(valorCredito>0) {
 		this.saldo = this.saldo + valorCredito;
 		System.out.printf("Valor R$ %.2f creditado!\n", valorCredito);
-
+		}
+		else {
+			System.out.println("Valor de crédito inválido!");
+		}
 	}
 
 	public void pixDebito(double valorDebitoPix) {
@@ -75,9 +79,14 @@ public abstract class Conta {
 	public boolean testarSaldo(double valor) {
 		
 		boolean teste;
-		if(valor<=this.saldo) {
+		if(valor<=0) {
+			teste=false;
+		}
+		
+		else if(valor<=this.saldo) {
 			teste=true;
 		}
+		
 		else {
 			teste=false;
 			

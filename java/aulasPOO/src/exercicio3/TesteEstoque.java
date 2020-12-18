@@ -16,7 +16,7 @@ public class TesteEstoque {
 		List<Estoque> estoque = new ArrayList<>();
 
 		do {
-
+			
 			inseriLinha(85, "▬");
 			System.out.println("                        CONTROLE DE ESTOQUE");
 			inseriLinha(85, "▬");
@@ -133,7 +133,7 @@ public class TesteEstoque {
 			}
 
 		} while (opcaoMenu != 0);
-
+	leia.close();
 	}
 
 	public static void inseriLinha(int tamanho, String simbolo) {
