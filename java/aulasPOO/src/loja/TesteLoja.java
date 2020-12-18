@@ -11,13 +11,13 @@ public class TesteLoja {
 		String nome, cpf, codigo;
 		double totalPagamento = 0;
 		char opcaoCompra;
+		int opcaoContinua;
 
 		Scanner leia = new Scanner(System.in);
-		
+
 		List<Produto> listaProdutos = new ArrayList<>();
 		List<Produto> carrinho = new ArrayList<>();
 
-		
 		listaProdutos.add(new Produto("Vestido Jeans", "MM01", 85, 10));
 		listaProdutos.add(new Produto("Shorts Jeans", "MM02", 30, 10));
 		listaProdutos.add(new Produto("Calça Jeans", "MM03", 100, 10));
@@ -30,8 +30,8 @@ public class TesteLoja {
 		listaProdutos.add(new Produto("Croped vermelho", "MM10", 20, 10));
 
 		
+		
 		do {
-			
 			inseriLinha(85, "▬");
 			System.out.println("                                 Loja Meury Modas");
 			System.out.println("                        Um novo conceito de Moda Feminina");
@@ -39,10 +39,9 @@ public class TesteLoja {
 			System.out.println("\n[1]-COMPRAR PRODUTOS\n[2]-GERENCIAR ESTOQUE\n[3]-SAIR");
 			System.out.printf("Opção: ");
 			opcaoMenu = leia.nextInt();
-			
 
 			if (opcaoMenu == 1) {
-
+				carrinho.clear();
 				System.out.print("\nPor favor informe o seu nome: ");
 				nome = leia.next().toUpperCase();
 				System.out.print("Informe como você se identifica: [M]Masculino, [F]Feminino ou [X]Outros");
@@ -63,43 +62,56 @@ public class TesteLoja {
 
 				Cliente cliente = new Cliente(nome, genero, anoNascimento, cpf);
 
-			
 				trataGenero(cliente.getNome(), cliente.getGenero());
-				imprimeListaProdutos(listaProdutos);
-				
+
 				do {
 					imprimeListaProdutos(listaProdutos);
+
 					System.out.printf("Informe o código do produto que deseja comprar: ");
 					codigo = leia.next().toUpperCase();
 					System.out.printf("Informe a quantidade que deseja comprar: ");
 					quantidade = leia.nextInt();
 					inseriLinha(85, "▬");
-					
-					
-					boolean encontra=false;
-					
+
+					boolean encontra = false;
+					boolean passou = false;
+					boolean teste=false;
+
 					for (Produto produtos : listaProdutos) {
-						
+
 						if (codigo.equals(produtos.getCodigo())) {
+
 							if (quantidade <= produtos.getQtdeProdutoEstoque()) {
 								totalPagamento += produtos.venda(quantidade);
+								
+								for (Produto pod : carrinho) {
+									if(codigo.equals(pod.getCodigo())) {
+										teste=true;
+										pod.adicionaEstoque(quantidade);
+										encontra = true;
+									}
+									
+									
+								}
+								if(teste==false) {
+								
 								carrinho.add(new Produto(produtos.getNomeProduto(), produtos.getCodigo(),
 										produtos.getPrecoUnitario(), quantidade));
-								encontra=true;
-								
+								encontra = true;
+								}
 							} else {
+								passou = true;
 								System.out.println("Quantidade indisponível");
 							}
 						}
-						
 
 					}
-					if(encontra==false) {
+					if (encontra == false && passou == false) {
 						System.out.println("cod ivalido");
 					}
 
 					System.out.println();
-					System.out.println("Deseja Continuar Comprando? [S]-Sim ou [N]-Não ");
+					System.out.println("Deseja continuar comprando? [S]-Sim ou [N]-Não ");
 					opcaoCompra = leia.next().toUpperCase().charAt(0);
 
 					while (opcaoCompra != 'S' && opcaoCompra != 'N') {
@@ -108,26 +120,99 @@ public class TesteLoja {
 					}
 
 					if (opcaoCompra == 'N') {
-						System.out.println("               Carrinho de Compras - Loja Meury Modas");
-						inseriLinha(85, "▬");
+						do {
+							System.out.println("                  Carrinho de Compras - Loja Meury Modas");
+							inseriLinha(85, "▬");
 
-						System.out.println("\nCODIGO\t\tPRODUTO\t\t\tR$(UN)\t\t\tQTDE\t  PARCIAL R$");
-						inseriLinha(85, "▬");
-						for (Produto produtos : carrinho) {
+							System.out.println("\nCODIGO\t\tPRODUTO\t\t\tR$(UN)\t\t\tQTDE\t  PARCIAL R$");
+							inseriLinha(85, "▬");
+							for (Produto produtos : carrinho) {
 
-							System.out.printf("%s\t\t%s\t\t%.2f\t\t\t  %d\t   %.2f\n", produtos.getCodigo(),
-									produtos.getNomeProduto(), produtos.getPrecoUnitario(),
-									produtos.getQtdeProdutoEstoque(), produtos.venda(produtos.getQtdeProdutoEstoque()));
-						}
-						inseriLinha(85, "▬");
-						System.out.printf("      \t\t\t\t\t\tTOTAL DA COMPRA: R$ %.2f", totalPagamento);
+								System.out.printf("%s\t\t%s\t\t%.2f\t\t\t  %d\t   %.2f\n", produtos.getCodigo(),
+										produtos.getNomeProduto(), produtos.getPrecoUnitario(),
+										produtos.getQtdeProdutoEstoque(),
+										(produtos.getPrecoUnitario() * produtos.getQtdeProdutoEstoque()));
+							}
+							inseriLinha(85, "▬");
+							System.out.printf("             \t\t\t\t\t\tTOTAL DA COMPRA: R$ %.2f", totalPagamento);
+							System.out.println(
+									"\nSelecione uma das opções: \n[1]-Continuar Comprando\n[2]-Remover um produto do carrinhoz\n[3]-Finalizar a compra e emitir a nota fiscal");
+							opcaoContinua = leia.nextInt();
+							if (opcaoContinua == 1) {
+								opcaoCompra = 'S';
+							} else if (opcaoContinua == 2) {
+								System.out.printf("Informe o código do produto que deseja remover: ");
+								codigo = leia.next().toUpperCase();
+								System.out.printf("Informe a quantidade que deseja remover: ");
+								quantidade = leia.nextInt();
 
-					}
-				
-				
-				
-				} while (opcaoCompra != 'N');
-				opcao=verifica(leia);
+								encontra = false;
+								passou = false;
+
+								for (Produto produtos : carrinho) {
+
+									if (codigo.equals(produtos.getCodigo())) {
+										
+										if (quantidade < produtos.getQtdeProdutoEstoque()) {
+											totalPagamento -= produtos.venda(quantidade);
+											System.out.printf("Foi removido  %d  produtos do tipo  %s", quantidade,produtos.getNomeProduto());
+											pula();
+											encontra = true;
+											for (Produto prod : listaProdutos) {
+
+												if (codigo.equals(prod.getCodigo())) {
+													prod.adicionaEstoque(quantidade);
+
+												}
+											}
+
+										} else if (quantidade == produtos.getQtdeProdutoEstoque()) {
+
+											totalPagamento -= produtos.venda(quantidade);
+											System.out.printf("Foi removido  %d  produtos do tipo  %s", quantidade,produtos.getNomeProduto());
+											pula();
+											encontra = true;
+											int indice=carrinho.indexOf(produtos);
+											System.out.printf("numero %d ", indice);
+											carrinho.remove(indice);
+								
+											
+											for (Produto prod : listaProdutos) {
+
+												if (codigo.equals(prod.getCodigo())) {
+													prod.adicionaEstoque(quantidade);
+												
+
+												}
+											}
+											break;
+										
+										} else {
+											passou = true;
+
+										}
+									}
+
+								}
+								if (passou == true) {
+									System.out.println("Quantidade indisponível");
+								}
+								if (encontra == false && passou == false) {
+									System.out.println("Código iválido");
+								}
+
+							} else if (opcaoContinua == 3) {
+								System.out.println("NOTA FISCAL");
+								System.exit(0);
+						
+							
+							}
+
+						} while (opcaoContinua != 1);
+					} // final if
+
+				} while (opcaoCompra == 'S');
+				opcao = verifica(leia);
 			} else if (opcaoMenu == 2) {
 				System.out.print("WIP");// Work in progress
 

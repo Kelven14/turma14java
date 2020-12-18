@@ -20,7 +20,7 @@ public class ContaEspecial extends ContaCorrente {
 	public double getValorLimite() {
 		return valorLimite;
 	}
-
+	
 	public void setValorLimite(double valorLimite) {
 		this.valorLimite = valorLimite;
 		registraLimite();
@@ -41,6 +41,7 @@ public class ContaEspecial extends ContaCorrente {
 			credito(valorCredito);
 			this.valorLimite = this.valorLimite - valorCredito;
 			System.out.println("limite atual é R$" + this.valorLimite);
+			System.out.println("Saldo atual da conta é R$" + super.getSaldo());
 			teste = true;
 		} else {
 			teste = false;
@@ -66,13 +67,11 @@ public class ContaEspecial extends ContaCorrente {
 			this.valorLimite += diferenca;
 			this.saldo = this.saldo + valorCredito - diferenca;
 			System.out.printf("Valor R$ %.2f creditado!\n", valorCredito);
-			System.out.println("Saldo atual da conta é R$" + super.getSaldo());
-			System.out.println("limite atual é R$" + this.valorLimite);
+			
 		} else {
 			this.saldo = this.saldo + valorCredito;
 			System.out.printf("Valor R$ %.2f creditado!\n", valorCredito);
-			System.out.println("Saldo atual da conta é R$" + super.getSaldo());
-			System.out.println("limite atual é R$" + this.valorLimite);
+		
 		}
 	}
 
