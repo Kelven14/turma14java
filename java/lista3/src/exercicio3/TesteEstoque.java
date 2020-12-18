@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 public class TesteEstoque {
 	public static void main(String[] args) {
 		int opcaoMenu;
@@ -27,7 +25,7 @@ public class TesteEstoque {
 			System.out.println("3 - ATUALIZAR DADO DO ESTOQUE");
 			System.out.println("4 - MOSTRAR ESTOQUE");
 			System.out.println("0 - SAIR");
-			System.out.printf("escolha sua opcao: ");
+			System.out.printf("Opcão: ");
 			opcaoMenu = leia.nextInt();
 			switch (opcaoMenu) {
 			case 1: {
@@ -50,54 +48,63 @@ public class TesteEstoque {
 				break;
 
 			case 2: {
+				if (estoque.size() > 0) {
+					boolean encontra = false;
+					System.out.printf("Informe o código do produto que deseja remover: ");
+					codigo = leia.next().toUpperCase();
 
-				boolean encontra=false;
-				System.out.printf("Informe o código do produto que deseja remover: ");
-				codigo = leia.next().toUpperCase();
-				
-				for(Estoque produto: estoque) {
-					if(codigo.equals(produto.getCodigo())) {
-						estoque.remove(produto);
-						System.out.println("Produto removido do estoque");
-						encontra=true;
-						
+					for (Estoque produto : estoque) {
+						if (codigo.equals(produto.getCodigo())) {
+							estoque.remove(produto);
+							System.out.println("Produto removido do estoque");
+							encontra = true;
+							break;
+
+						}
+
 					}
-					
-				}
-				if(encontra==false) {
-					System.out.println("Produto não encontrado, digite o código novamente!");
-					
+					if (encontra == false) {
+						System.out.println("Produto não encontrado, digite o código novamente!");
+
+					}
+				} else {
+					System.out.println("Lista vazia!");
 				}
 			}
 				break;
 
 			case 3: {
-				boolean encontra=false;
-				System.out.printf("Informe o código do produto que deseja atualizar os dados: ");
-				codigo = leia.next().toUpperCase();
-				for(Estoque produto: estoque) {
-					if(codigo.equals(produto.getCodigo())) {
-						System.out.print("Digite o nome do Produto: ");
-						produto.setNomeProduto(leia.next()); 
+				if (estoque.size() > 0) {
+					boolean encontra = false;
+					System.out.printf("Informe o código do produto que deseja atualizar os dados: ");
+					codigo = leia.next().toUpperCase();
+					for (Estoque produto : estoque) {
+						if (codigo.equals(produto.getCodigo())) {
+							System.out.print("Digite o nome do Produto: ");
+							produto.setNomeProduto(leia.next());
 
-						System.out.print("Digite o preço unitário: R$");
-						produto.setPrecoUnitario(leia.nextDouble());
+							System.out.print("Digite o preço unitário: R$");
+							produto.setPrecoUnitario(leia.nextDouble());
 
-						System.out.print("Digite a quantidade do item: ");
-						produto.setQuantidade(leia.nextInt());
-						
-						encontra=true;
+							System.out.print("Digite a quantidade do item: ");
+							produto.setQuantidade(leia.nextInt());
+
+							encontra = true;
+						}
+					}
+					if (encontra == false) {
+						System.out.println("Produto não encontrado, digite o código novamente!");
+
 					}
 				}
-				if(encontra==false) {
-					System.out.println("Produto não encontrado, digite o código novamente!");
-					
+				else {
+					System.out.println("Lista vazia!");
 				}
-
 			}
 				break;
 
 			case 4: {
+				if (estoque.size() > 0) {
 				System.out.println("                 LISTA DE PRODUTOS NO ESTOQUE");
 				inseriLinha(85, "▬");
 				System.out.println("\nCODIGO\t\tR$(UN)\t\tESTOQUE\tPRODUTO");
@@ -108,12 +115,16 @@ public class TesteEstoque {
 				}
 
 			}
+				else {
+					System.out.println("Lista vazia!");
+				}
+			}
 				break;
 
 			case 0: {
 				System.out.println("Saindo...");
 				System.exit(0);
-				
+
 			}
 				break;
 
